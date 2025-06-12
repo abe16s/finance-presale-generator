@@ -46,13 +46,22 @@ def generate_presale():
             gpt_reply = response.choices[0].message.content.strip()
             content = json.loads(gpt_reply)
 
+            base_url = "https://card-apply-demo.site/offer"
+            utm_campaign = card_name.lower().replace(" ", "_")  
+            utm_source = "presale"
+            utm_medium = "button"
+
+            utm_link = f"{base_url}?utm_campaign={utm_campaign}&utm_source={utm_source}&utm_medium={utm_medium}"
+
+
             return render_template('presale.html',
                                    card_name=card_name,
                                    headline=content['headline'],
                                    subheadline=content['subheadline'],
                                    hook=content['hook'],
                                    benefits=content['benefits'],
-                                   cta=content['cta'])
+                                   cta=content['cta'],
+                                   utm_link=utm_link)
         except Exception as e:
             return f"<h1>Error:</h1><p>{e}</p><a href='/'>Go Back</a>"
 
