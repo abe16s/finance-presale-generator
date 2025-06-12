@@ -9,6 +9,7 @@ app = Flask(__name__, template_folder='../templates')
 CORS(app)
 
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+POSTHOG_API_KEY = os.getenv('POSTHOG_API_KEY')
 
 @app.route('/', methods=['GET', 'POST'])
 def generate_presale():
@@ -61,7 +62,8 @@ def generate_presale():
                                    hook=content['hook'],
                                    benefits=content['benefits'],
                                    cta=content['cta'],
-                                   utm_link=utm_link)
+                                   utm_link=utm_link,
+                                   posthog_api_key=POSTHOG_API_KEY)
         except Exception as e:
             return f"<h1>Error:</h1><p>{e}</p><a href='/'>Go Back</a>"
 
