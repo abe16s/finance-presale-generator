@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ card_name }} - Presale Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-xl w-full bg-white rounded-2xl shadow-lg p-8 space-y-6">
+      <h1 class="text-3xl font-bold text-center text-gray-800">
+        {{ headline }}
+      </h1>
+      <h2 class="text-xl text-center text-gray-600">{{ subheadline }}</h2>
+
+      <p class="text-gray-700">{{ hook }}</p>
+
+      <ul class="list-disc pl-5 space-y-2 text-gray-700">
+        {% for benefit in benefits %}
+        <li>{{ benefit }}</li>
+        {% endfor %}
+      </ul>
+
+      <div class="flex justify-center">
+        <a
+          href="https://card-apply-demo.site/offer?utm_campaign=velocity_test&utm_source=presale&utm_medium=button"
+          class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition"
+        >
+          {{ cta }}
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
