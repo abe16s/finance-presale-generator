@@ -19,24 +19,32 @@ def generate_presale():
         main_benefit = request.form['main_benefit']
 
         prompt = f"""
-        Write high-converting presale page content for a credit card called "{card_name}", targeting {target_audience}. Highlight the key benefit: "{main_benefit}".
+        You are a professional copywriter writing a high-converting blog-style presale page for a credit card offer. This content should look like a sponsored editorial article, designed to look organic and native, not like a direct ad.
 
-        Return the following JSON structure:
+        Use the following input variables:
+        - Product Name: {card_name}
+        - Target Audience: {target_audience}
+        - Primary Benefit: {main_benefit}
+
+        Write the output in the following JSON structure:
         {{
-        "headline": "[Max 10 words, bold, exciting]",
-        "subheadline": "[Max 15 words, supporting the headline]",
-        "hook": "[1 short, persuasive paragraph introducing the card]",
-        "benefits": ["[Exactly 3, high-impact benefits]"],
-        "cta": "[Very short button text like 'Apply Now', max 4 words]"
+        "headline": "Clickbait-style, curiosity-driven headline",
+        "subheadline": "Supporting subheadline",
+        "publish_date": "Recent publish date, e.g., 'Updated: June 2025'",
+        "hook": "Story-based or shocking intro paragraph",
+        "body": ["Paragraph 1", "Paragraph 2", "Paragraph 3"],
+        "bullets": ["Benefit 1", "Benefit 2", "Benefit 3", "Benefit 4", "Benefit 5"],
+        "alert_block": "Urgency or warning block",
+        "social_proof": "Optional stat or quote",
+        "cta": "Short, strong action text like 'Check Eligibility'",
+        "disclaimer": "Light legal note or sponsored disclaimer"
         }}
 
         Guidelines:
-        - Use energetic, persuasive language.
-        - Benefits must be direct, specific, and formatted as phrases.
-        - Do not exceed 3 benefits.
-        - Keep CTA button text to 4 words max.
+        - Make it persuasive, emotional, and informal — like a BuzzFeed or NerdWallet editorial review.
+        - Break the copy into multiple sections with subheadings.
+        - Use bold typography and an engaging, human tone.
         """
-
 
         try:
             response = client.chat.completions.create(
@@ -54,16 +62,21 @@ def generate_presale():
 
             utm_link = f"{base_url}?utm_campaign={utm_campaign}&utm_source={utm_source}&utm_medium={utm_medium}"
 
-
             return render_template('presale.html',
                                    card_name=card_name,
                                    headline=content['headline'],
                                    subheadline=content['subheadline'],
+                                   publish_date=content['publish_date'],
                                    hook=content['hook'],
-                                   benefits=content['benefits'],
+                                   body=content['body'],
+                                   bullets=content['bullets'],
+                                   alert_block=content['alert_block'],
+                                   social_proof=content['social_proof'],
                                    cta=content['cta'],
+                                   disclaimer=content['disclaimer'],
                                    utm_link=utm_link,
                                    posthog_api_key=POSTHOG_API_KEY)
+
         except Exception as e:
             return f"<h1>Error:</h1><p>{e}</p><a href='/'>Go Back</a>"
 
