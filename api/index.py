@@ -18,18 +18,24 @@ def generate_presale():
         main_benefit = request.form['main_benefit']
 
         prompt = f"""
-        Write a high-converting presale page for a credit card called "{card_name}", targeting {target_audience}.
-        Highlight the benefit: "{main_benefit}".
+        Write high-converting presale page content for a credit card called "{card_name}", targeting {target_audience}. Highlight the key benefit: "{main_benefit}".
 
-        Return the following as JSON:
+        Return the following JSON structure:
         {{
-            "headline": "...",
-            "subheadline": "...",
-            "hook": "...",
-            "benefits": ["...", "...", "..."],
-            "cta": "..."
+        "headline": "[Max 10 words, bold, exciting]",
+        "subheadline": "[Max 15 words, supporting the headline]",
+        "hook": "[1 short, persuasive paragraph introducing the card]",
+        "benefits": ["[Exactly 3, high-impact benefits]"],
+        "cta": "[Very short button text like 'Apply Now', max 3 words]"
         }}
+
+        Guidelines:
+        - Use energetic, persuasive language.
+        - Benefits must be direct, specific, and formatted as short phrases.
+        - Do not exceed 3 benefits.
+        - Keep CTA button text to 3 words max.
         """
+
 
         try:
             response = client.chat.completions.create(
