@@ -5,25 +5,34 @@
     <title>{{ card_name }} - Presale Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
-    <div class="max-w-xl w-full bg-white rounded-2xl shadow-lg p-8 space-y-6">
-      <h1 class="text-3xl font-bold text-center text-gray-800">
-        {{ headline }}
-      </h1>
-      <h2 class="text-xl text-center text-gray-600">{{ subheadline }}</h2>
+  <body
+    class="bg-gradient-to-r from-blue-100 to-purple-100 min-h-screen flex items-center justify-center p-6"
+  >
+    <div
+      class="bg-white max-w-2xl w-full p-8 rounded-2xl shadow-xl space-y-6 animate-fade-in"
+    >
+      <div class="text-center space-y-2">
+        <h1 class="text-4xl font-bold text-gray-800">{{ headline }}</h1>
+        <h2 class="text-xl text-gray-600">{{ subheadline }}</h2>
+      </div>
 
-      <p class="text-gray-700">{{ hook }}</p>
+      <p class="text-gray-700 text-lg">{{ hook }}</p>
 
-      <ul class="list-disc pl-5 space-y-2 text-gray-700">
+      <ul class="space-y-3">
         {% for benefit in benefits %}
-        <li>{{ benefit }}</li>
+        <li class="flex items-start space-x-3">
+          <span
+            class="inline-block w-3 h-3 bg-blue-600 rounded-full mt-2"
+          ></span>
+          <span class="text-gray-700">{{ benefit }}</span>
+        </li>
         {% endfor %}
       </ul>
 
       <div class="flex justify-center">
         <a
           href="https://card-apply-demo.site/offer?utm_campaign=velocity_test&utm_source=presale&utm_medium=button"
-          class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition"
+          class="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 text-lg font-semibold transition"
         >
           {{ cta }}
         </a>
